@@ -33,6 +33,8 @@ dependencies:
   flutter:
     sdk: flutter
   get_it: ^7.2.0
+  html: ^0.15.2
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_lints: ^2.0.0
