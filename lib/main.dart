@@ -4,9 +4,9 @@ import 'package:http/http.dart'as http;
 
 void main() async{
   var response =
-        await http.get(Uri.parse('https://lebanon.gold-price-today.com/'));
+        await http.get(Uri.parse('https://egypt.gold-price-today.com/'));
 
-  var model = GoldModel.Response(response:response , country: "lebanon");
+  var model = GoldModel.Response(response:response , country: "egypt");
   model.goldprices.forEach((element) { print(element?.sellPrice);});
         
   runApp(const MaterialApp());
