@@ -14,15 +14,16 @@ class GoldPrice {
 }
 
 class GoldModel {
+  final String country;
   final List<GoldPrice?> goldprices;
-  GoldModel(this.goldprices);
+  GoldModel(this.goldprices, this.country);
 
-  factory GoldModel.Response(Response response) {
+  factory GoldModel.Response({required Response response , required String country}) {
     // it is a web scarping method may be diffreant form website to another or when html respons change
     // it based on https://gold-price-today.com/
     var document = parser.parse(response.body);
     var rows = document.querySelectorAll('tr');
-    return GoldModel(extractListOfGoldPrices(rows));
+    return GoldModel(extractListOfGoldPrices(rows) , country);
   }
 }
 
