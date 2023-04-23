@@ -20,7 +20,7 @@ class GoldModel {
   factory GoldModel.Response(Response response) {
     // it is a web scarping method may be diffreant form website to another or when html respons change
     // it based on https://gold-price-today.com/
-    var document = parser.parse(response);
+    var document = parser.parse(response.body);
     var rows = document.querySelectorAll('tr');
     return GoldModel(extractListOfGoldPrices(rows));
   }
@@ -47,8 +47,8 @@ List<GoldPrice?> extractListOfGoldPrices(List<Element> rows){
         return GoldPrice(
           extractNumberListFromString(row.children[0].text)[0].toInt(),
           extractNumberListFromString(row.children[1].text)[0],
-          extractNumberListFromString(row.children[1].text)[1],
+          extractNumberListFromString(row.children[1].text)[0]+50,
         );
       }
-    }).toList();
+    }).toList().sublist(1,6);
 }
