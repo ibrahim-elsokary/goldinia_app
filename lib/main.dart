@@ -12,7 +12,7 @@ void main() async {
     print(element?.sellPrice);
   });
 
-  runApp(GoldiniaApp());
+  runApp(const GoldiniaApp());
 }
 
 class GoldiniaApp extends StatelessWidget {
