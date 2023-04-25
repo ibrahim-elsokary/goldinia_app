@@ -4,6 +4,7 @@ import 'package:goldinia_app/core/utils/styles.dart';
 import 'package:goldinia_app/features/home/pesentation/view/widgets/custom_wallet_widget.dart';
 import 'custom_drop_down_menu_for_country.dart';
 import 'custom_home_app_bar.dart';
+import 'price_today_custom_widget.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({super.key});
@@ -48,7 +49,7 @@ class HomeBody extends StatelessWidget {
                   const SizedBox(
                     height: 55,
                   ),
-                  //Card(margin: EdgeInsets.zero,child: SizedBox(height: 100,child: Text('data'),width: double.infinity,),)
+                  const PriceTodayCustomWidget()
                 ],
               ),
             ),
@@ -57,5 +58,7 @@ class HomeBody extends StatelessWidget {
       ),
     );
   }
+
+
 }
 

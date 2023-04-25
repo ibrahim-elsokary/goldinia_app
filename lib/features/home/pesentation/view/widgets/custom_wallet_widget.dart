@@ -10,10 +10,9 @@ class CustomWalletWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 10),
       clipBehavior: Clip.hardEdge,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       child: Column(
         children: [
           Row(
@@ -23,10 +22,10 @@ class CustomWalletWidget extends StatelessWidget {
                 child: Stack(
                   alignment: Alignment.centerRight,
                   children: [
-                    const Center(
+                     Center(
                       child: Text(
                         '50G',
-                        style: Styles.fontStyle24Normal,
+                        style: Styles.fontStyle24Normal.copyWith(color: StyleColors.yellow),
                       ),
                     ),
                     Align(
@@ -52,39 +51,62 @@ class CustomWalletWidget extends StatelessWidget {
 
   Table table() {
     return Table(
-            defaultVerticalAlignment:
-                TableCellVerticalAlignment.middle,
-            children: const [
-              
-              TableRow(
-                  decoration: BoxDecoration(
-                      border: BorderDirectional(
-                          bottom: BorderSide(
-                              width: 1,
-                              color: StyleColors.gray))),
-                  children: [
-                    Padding(
-                      padding:  EdgeInsets.fromLTRB(
-                          0, 15, 0, 15),
-                      child: Text('current value',
-                          textAlign: TextAlign.center),
-                    ),
-                    Center(child: Text('1966')),
-                    Center(child: Text('98300')),
-                    Text('(EGP/g)'),
-                  ]),
-              TableRow(children: [
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 15),
-                  child: Text('bought value',
-                      textAlign: TextAlign.center),
+      defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+      children: [
+        TableRow(
+            decoration: const BoxDecoration(
+                border: BorderDirectional(
+                    bottom: BorderSide(width: 1, color: StyleColors.gray))),
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                child: Text(
+                  'current value',
+                  style: Styles.fontStyle14Bold
+                      .copyWith(color: StyleColors.yellow),
+                  textAlign: TextAlign.center,
                 ),
-                Center(child: Text('1966')),
-                Center(child: Text('98300')),
-                Text('(EGP/g)'),
-              ]),
-            ],
-          );
+              ),
+              const Center(
+                  child: Text(
+                '1966',
+                style: Styles.fontStyle14Normal,
+              )),
+              const Center(
+                  child: Text(
+                '98300',
+                style: Styles.fontStyle14Normal,
+              )),
+              const Text(
+                '(EGP/g)',
+                style: Styles.fontStyle14Normal,
+              ),
+            ]),
+        TableRow(children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: Text(
+              'bought value',
+              style: Styles.fontStyle14Bold.copyWith(color: StyleColors.yellow),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          const Center(
+              child: Text(
+            '1966',
+            style: Styles.fontStyle14Normal,
+          )),
+          const Center(
+              child: Text(
+            '98300',
+            style: Styles.fontStyle14Normal,
+          )),
+          const Text(
+            '(EGP/g)',
+            style: Styles.fontStyle14Normal,
+          ),
+        ]),
+      ],
+    );
   }
 }
