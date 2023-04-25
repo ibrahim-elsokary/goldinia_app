@@ -21,8 +21,8 @@ class GoldiniaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(
-      
-      home: HomeView(),
+      theme: ThemeData.light().copyWith(scaffoldBackgroundColor: Colors.white),
+      home: const HomeView(),
       debugShowCheckedModeBanner: false,
     );
   }

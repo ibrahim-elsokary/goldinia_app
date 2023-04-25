@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:goldinia_app/core/utils/style_colors.dart';
 import 'package:goldinia_app/core/utils/styles.dart';
+import 'package:goldinia_app/features/home/pesentation/view/widgets/custom_circular_button.dart';
 import 'package:goldinia_app/features/home/pesentation/view/widgets/custom_wallet_widget.dart';
+import 'custom_bottom_bar.dart';
 import 'custom_drop_down_menu_for_country.dart';
 import 'custom_home_app_bar.dart';
 import 'price_today_custom_widget.dart';
@@ -28,8 +30,8 @@ class HomeBody extends StatelessWidget {
               child: Card(
                 clipBehavior: Clip.hardEdge,
                 color: StyleColors.brightYellow,
-                shape:
-                    RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
                 child: Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: Column(
@@ -53,21 +55,17 @@ class HomeBody extends StatelessWidget {
                         height: 55,
                       ),
                       const PriceTodayCustomWidget(),
-                      const SizedBox(
-                        height: 200,
-                      ),
                     ],
                   ),
                 ),
               ),
             ),
           ),
-          
+          const CustomBottomBar()
         ],
       ),
     );
   }
-
-
 }
+
 

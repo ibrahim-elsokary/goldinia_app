@@ -8,10 +8,11 @@ class CustomCircularButton extends StatelessWidget {
     this.iconColor = StyleColors.subColor,
     this.backgroundColor,
     this.onPressed,
+    this.borderSide = const BorderSide(color: StyleColors.subColor),
   });
 
   final Widget icon;
-  final BorderSide borderSide = const BorderSide(color: StyleColors.subColor);
+  final BorderSide borderSide ;
   final Color iconColor;
   final Color? backgroundColor;
   final double size = 57;
@@ -19,10 +20,12 @@ class CustomCircularButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Ink(
-      color: backgroundColor,
+
+      
       width: size,
       height: size,
       decoration: ShapeDecoration(
+        color: backgroundColor,
         shape: CircleBorder(side: borderSide),
       ),
       child: IconButton(
