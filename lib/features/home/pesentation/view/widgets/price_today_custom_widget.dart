@@ -1,14 +1,20 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:goldinia_app/core/models/gold_prices_model.dart';
 import 'package:goldinia_app/core/utils/style_colors.dart';
 import 'package:goldinia_app/core/utils/styles.dart';
+import 'package:goldinia_app/features/home/pesentation/view_model/cubit/fetch_today_price_cubit.dart';
 
 class PriceTodayCustomWidget extends StatelessWidget {
   const PriceTodayCustomWidget({
     super.key,
+    required this.goldPrice,
+    required this.weightUnit,
   });
-
+  final GoldPrice goldPrice;
+  final String weightUnit;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,12 +23,12 @@ class PriceTodayCustomWidget extends StatelessWidget {
         color: Colors.white,
       ),
       child: Column(
-        children: const [
-          CustomSellAndBuyWidget(),
+        children: [
+          CustomSellAndBuyWidget(goldPrice: goldPrice, weightUnit: weightUnit),
           SizedBox(
             height: 7,
           ),
-          LowerAndHigherPriceSection(),
+          LowerAndHigherPriceSection(goldPrice: goldPrice),
           SizedBox(
             height: 35,
           ),
@@ -42,8 +48,11 @@ class PriceTodayCustomWidget extends StatelessWidget {
 class CustomSellAndBuyWidget extends StatelessWidget {
   const CustomSellAndBuyWidget({
     super.key,
+    required this.goldPrice,
+    required this.weightUnit,
   });
-
+  final GoldPrice goldPrice;
+  final String weightUnit;
   @override
   Widget build(BuildContext context) {
     return Table(
@@ -56,22 +65,23 @@ class CustomSellAndBuyWidget extends StatelessWidget {
               ),
             ),
             children: [
-               Padding(
+              Padding(
                 padding: const EdgeInsets.symmetric(vertical: 30),
                 child: Text(
                   'Sell',
                   textAlign: TextAlign.center,
-                  style: Styles.fontStyle18SimiBold.copyWith(color: Colors.black),
+                  style:
+                      Styles.fontStyle18SimiBold.copyWith(color: Colors.black),
                 ),
               ),
-              const Center(
+              Center(
                   child: Text(
-                '1966',
+                goldPrice.sellPrice.toString(),
                 style: Styles.fontStyle18Normal,
               )),
-              const Center(
+              Center(
                   child: Text(
-                '(EGP/g)',
+                '(EGP/$weightUnit)',
                 style: Styles.fontStyle18Normal,
               )),
               Center(
@@ -88,22 +98,23 @@ class CustomSellAndBuyWidget extends StatelessWidget {
               ),
             ),
             children: [
-               Padding(
+              Padding(
                 padding: const EdgeInsets.symmetric(vertical: 30),
                 child: Text(
                   'buy',
                   textAlign: TextAlign.center,
-                  style: Styles.fontStyle18SimiBold.copyWith(color: Colors.black),
+                  style:
+                      Styles.fontStyle18SimiBold.copyWith(color: Colors.black),
                 ),
               ),
-              const Center(
+              Center(
                   child: Text(
-                '1866',
+                goldPrice.buyPrice.toString(),
                 style: Styles.fontStyle18Normal,
               )),
-              const Center(
+              Center(
                   child: Text(
-                '(EGP/g)',
+                '(EGP/$weightUnit)',
                 style: Styles.fontStyle18Normal,
               )),
               Center(
@@ -121,8 +132,9 @@ class CustomSellAndBuyWidget extends StatelessWidget {
 class LowerAndHigherPriceSection extends StatelessWidget {
   const LowerAndHigherPriceSection({
     super.key,
+    required this.goldPrice,
   });
-
+  final GoldPrice goldPrice;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -130,7 +142,7 @@ class LowerAndHigherPriceSection extends StatelessWidget {
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children:  [
+            children: [
               Text(
                 'higher price',
                 style: Styles.fontStyle18SimiBold.copyWith(color: Colors.black),
@@ -139,7 +151,7 @@ class LowerAndHigherPriceSection extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                '1989(EGP)',
+                (goldPrice.sellPrice! / 0.98).round().toString(),
                 style: Styles.fontStyle18Normal,
               ),
             ],
@@ -148,7 +160,7 @@ class LowerAndHigherPriceSection extends StatelessWidget {
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children:  [
+            children: [
               Text(
                 'lower price',
                 style: Styles.fontStyle18SimiBold.copyWith(color: Colors.black),
@@ -157,7 +169,7 @@ class LowerAndHigherPriceSection extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                '1989(EGP)',
+                (goldPrice.sellPrice! / 1.01).round().toString(),
                 style: Styles.fontStyle18Normal,
               ),
             ],
@@ -168,58 +180,51 @@ class LowerAndHigherPriceSection extends StatelessWidget {
   }
 }
 
-class CustomSwitchButton extends StatefulWidget {
+class CustomSwitchButton extends StatelessWidget {
   const CustomSwitchButton({super.key});
 
   @override
-  State<CustomSwitchButton> createState() => _CustomSwitchButtonState();
-}
-
-class _CustomSwitchButtonState extends State<CustomSwitchButton> {
-  @override
-  bool _leftButtonActive = false;
   Widget build(BuildContext context) {
-    return Container(
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-      child: Row(
-        children: [
-          Expanded(
-            child: SizedBox(
-              height: 35,
-              child: ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    _leftButtonActive = true;
-                  });
-                },
-                style: selectedButtonStyle(_leftButtonActive),
-                child: const Text(
-                  'gram(g)',
-                 
+    var cubit = BlocProvider.of<FetchTodayPriceCubit>(context);
+    return BlocBuilder<FetchTodayPriceCubit, FetchTodayPriceState>(
+      builder: (context, state) {
+        return Container(
+          clipBehavior: Clip.hardEdge,
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+          child: Row(
+            children: [
+              Expanded(
+                child: SizedBox(
+                  height: 35,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      cubit.changeWieghtUnit(true);
+                    },
+                    style: selectedButtonStyle(cubit.isGram),
+                    child: const Text(
+                      'gram(g)',
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-          Expanded(
-            child: SizedBox(
-              height: 35,
-              child: ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    _leftButtonActive = false;
-                  });
-                },
-                style: selectedButtonStyle(!_leftButtonActive),
-                child: const Text(
-                  'ounce(oz)',
-                  
+              Expanded(
+                child: SizedBox(
+                  height: 35,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      cubit.changeWieghtUnit(false);
+                    },
+                    style: selectedButtonStyle(!cubit.isGram),
+                    child: const Text(
+                      'ounce(oz)',
+                    ),
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 

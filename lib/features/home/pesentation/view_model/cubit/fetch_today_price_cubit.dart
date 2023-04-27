@@ -9,7 +9,11 @@ part 'fetch_today_price_state.dart';
 class FetchTodayPriceCubit extends Cubit<FetchTodayPriceState> {
   FetchTodayPriceCubit(this._homeRepo) : super(FetchTodayPriceInitial());
   final HomeRepo _homeRepo;
+  int bottomNavBarIndex=0 ;
+  bool isGram = true; 
+  late GoldModel _goldModel ;
 
+  
   Future<void> fetchTodayGoldPrice(String countryName) async {
     emit(FetchTodayPriceLoading());
     var result = await _homeRepo.fetchGoldPriceToday(countryName);
@@ -18,8 +22,22 @@ class FetchTodayPriceCubit extends Cubit<FetchTodayPriceState> {
         FetchTodayPriceFailure(failure.errorMsg);
       },
       (goldModel) {
+        _goldModel = goldModel;
         emit(FetchTodayPriceSuccess(goldModel));
       },
     );
   }
+
+  void changeBottomBarIndex(index){
+    bottomNavBarIndex=index ;
+    emit(ChangeNavBarSuccess());
+    emit(FetchTodayPriceSuccess(_goldModel));
+  }
+
+  void changeWieghtUnit(bool isGram){
+    this.isGram = isGram;
+    emit(ChangeWieghtUnit());
+    emit(FetchTodayPriceSuccess(_goldModel));
+  }
 }
+

@@ -18,3 +18,7 @@ class FetchTodayPriceFailure extends FetchTodayPriceState {
 
   FetchTodayPriceFailure(this.errorMsg);
 }
+
+class ChangeNavBarSuccess extends FetchTodayPriceState {}
+  
+class ChangeWieghtUnit extends FetchTodayPriceState {}

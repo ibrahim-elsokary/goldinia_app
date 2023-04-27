@@ -48,8 +48,8 @@ List<GoldPrice?> extractListOfGoldPrices(List<Element> rows){
         return GoldPrice(
           extractNumberListFromString(row.children[0].text)[0].toInt(),
           extractNumberListFromString(row.children[1].text)[0],
-          extractNumberListFromString(row.children[1].text)[0]+50,
+          extractNumberListFromString(row.children[1].text)[0]*0.95,
         );
       }
-    }).toList().sublist(1,6);
+    }).toList().sublist(1,6).reversed.toList();
 }

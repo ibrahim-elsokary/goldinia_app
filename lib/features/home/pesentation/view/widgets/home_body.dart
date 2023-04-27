@@ -6,6 +6,7 @@ import 'package:goldinia_app/features/home/pesentation/view/widgets/custom_walle
 import 'custom_bottom_bar.dart';
 import 'custom_drop_down_menu_for_country.dart';
 import 'custom_home_app_bar.dart';
+import 'golds_details_widget.dart';
 import 'price_today_custom_widget.dart';
 
 class HomeBody extends StatelessWidget {
@@ -16,56 +17,22 @@ class HomeBody extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Column(
-        children: [
-          const SizedBox(
+        children: const  [
+           SizedBox(
             height: 10,
           ),
-          const CustomHomeAppBar(),
-          const SizedBox(
+           CustomHomeAppBar(),
+           SizedBox(
             height: 45,
           ),
-          Expanded(
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Card(
-                clipBehavior: Clip.hardEdge,
-                color: StyleColors.brightYellow,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(children: const [
-                          Text(
-                            'Gold Price 21',
-                            style: Styles.fontStyle18SimiBold,
-                          ),
-                          Spacer(),
-                          CustomDropDownMenuForCountry(),
-                        ]),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const CustomWalletWidget(),
-                      const SizedBox(
-                        height: 55,
-                      ),
-                      const PriceTodayCustomWidget(),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const CustomBottomBar()
+          Expanded(child: GoldsDetailsWidget()),
+           CustomBottomBar()
         ],
       ),
     );
   }
 }
+
+
 
 
