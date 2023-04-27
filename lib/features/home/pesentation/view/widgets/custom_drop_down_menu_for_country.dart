@@ -1,32 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:goldinia_app/core/models/country_model.dart';
 import 'package:goldinia_app/core/utils/country_list.dart';
+import 'package:goldinia_app/features/home/pesentation/view_model/cubit/fetch_today_price_cubit.dart';
 
 import 'country_flag.dart';
 
-class CustomDropDownMenuForCountry extends StatefulWidget {
+class CustomDropDownMenuForCountry extends StatelessWidget {
+  
+
   const CustomDropDownMenuForCountry({super.key});
-
-  @override
-  State<CustomDropDownMenuForCountry> createState() =>
-      _CustomDropDownMenuForCountryState();
-}
-
-class _CustomDropDownMenuForCountryState
-    extends State<CustomDropDownMenuForCountry> {
-  String? selectedValue = 'Egypt';
   @override
   Widget build(BuildContext context) {
-    return DropdownButton(
-      value: selectedValue,
-      items: CountryList.countries.map((e) {
-        return DropdownMenuItem(
-          value: e.name,
-          child: CountryFlag(imagePath: e.imagePath),
+    var cubit = BlocProvider.of<FetchTodayPriceCubit>(context);
+    return BlocBuilder<FetchTodayPriceCubit, FetchTodayPriceState>(
+      builder: (context, state) {
+        return DropdownButton(
+          value: cubit.countryModel,
+          items: CountryList.countries.map((e) {
+            return DropdownMenuItem(
+              value: e,
+              child: CountryFlag(imagePath: e.imagePath),
+            );
+          }).toList(),
+          onChanged: (value) {
+            cubit.countryModel = value;
+            cubit.changeCountry(value!.endPointName);
+          },
         );
-      }).toList(),
-      onChanged: (value) {
-        selectedValue = value;
-        setState(() {});
       },
     );
   }

@@ -41,7 +41,7 @@ List<GoldPrice?> extractListOfGoldPrices(List<Element> rows){
       if (conditionForLengthTow) {
         return GoldPrice(
           extractNumberListFromString(row.children[0].text)[0].toInt(),
-          extractNumberListFromString(row.children[1].text)[1],
+          extractNumberListFromString(row.children[1].text).length>1?extractNumberListFromString(row.children[1].text)[1]:extractNumberListFromString(row.children[1].text)[0],
           extractNumberListFromString(row.children[1].text)[0],
         );
       } else if (conditionForLengthThree) {

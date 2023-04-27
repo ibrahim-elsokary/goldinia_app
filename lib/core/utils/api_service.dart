@@ -6,6 +6,7 @@ class ApiService {
   ApiService();
 
   Future <Response> get ({required String country})async{
-    return await http.get(Uri.parse('https://$country.gold-price-today.com/'));
+    var x = await http.get(Uri.parse('https://$country.gold-price-today.com/'));
+    return x;
   } 
 }

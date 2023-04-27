@@ -22,3 +22,5 @@ class FetchTodayPriceFailure extends FetchTodayPriceState {
 class ChangeNavBarSuccess extends FetchTodayPriceState {}
   
 class ChangeWieghtUnit extends FetchTodayPriceState {}
+
+class ChangeCountry extends FetchTodayPriceState {}

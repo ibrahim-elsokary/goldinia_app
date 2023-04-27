@@ -16,7 +16,7 @@ class GoldsDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = BlocProvider.of<FetchTodayPriceCubit>(context);
-    cubit.fetchTodayGoldPrice('egypt');
+    
     return BlocBuilder<FetchTodayPriceCubit, FetchTodayPriceState>(
       builder: (context, state) {
         
@@ -39,8 +39,8 @@ class GoldsDetailsWidget extends StatelessWidget {
                         'Gold price ${state.goldModel.goldprices[cubit.bottomNavBarIndex]!.karatNumber}',
                         style: Styles.fontStyle18SimiBold,
                       ),
-                      Spacer(),
-                      CustomDropDownMenuForCountry(),
+                      const Spacer(),
+                       CustomDropDownMenuForCountry(),
                     ]),
                   ),
                   const SizedBox(

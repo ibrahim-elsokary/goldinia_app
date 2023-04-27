@@ -76,7 +76,7 @@ class CustomSellAndBuyWidget extends StatelessWidget {
               ),
               Center(
                   child: Text(
-                goldPrice.sellPrice.toString(),
+                goldPrice.sellPrice!.round().toString(),
                 style: Styles.fontStyle18Normal,
               )),
               Center(
@@ -109,7 +109,7 @@ class CustomSellAndBuyWidget extends StatelessWidget {
               ),
               Center(
                   child: Text(
-                goldPrice.buyPrice.toString(),
+                goldPrice.buyPrice!.round().toString(),
                 style: Styles.fontStyle18Normal,
               )),
               Center(
