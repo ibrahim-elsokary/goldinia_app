@@ -29,7 +29,7 @@ class PriceTodayCustomWidget extends StatelessWidget {
           SizedBox(
             height: 7,
           ),
-          LowerAndHigherPriceSection(goldPrice: goldPrice),
+          LowerAndHigherPriceSection(goldPrice: goldPrice ,weightUnit: weightUnit),
           SizedBox(
             height: 35,
           ),
@@ -133,9 +133,10 @@ class CustomSellAndBuyWidget extends StatelessWidget {
 class LowerAndHigherPriceSection extends StatelessWidget {
   const LowerAndHigherPriceSection({
     super.key,
-    required this.goldPrice,
+    required this.goldPrice, required this.weightUnit,
   });
   final GoldPrice goldPrice;
+    final String weightUnit;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -152,7 +153,7 @@ class LowerAndHigherPriceSection extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                (goldPrice.sellPrice! / 0.98).round().toString(),
+                weightUnit=='oz'?(goldPrice.sellPrice!*ounceTogram/0.98).round().toString():(goldPrice.sellPrice!/0.98).round().toString(),
                 style: Styles.fontStyle18Normal,
               ),
             ],
@@ -170,7 +171,7 @@ class LowerAndHigherPriceSection extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                (goldPrice.sellPrice! / 1.01).round().toString(),
+                weightUnit=='oz'?(goldPrice.sellPrice!*ounceTogram/1.005).round().toString():(goldPrice.sellPrice!/1.01).round().toString(),
                 style: Styles.fontStyle18Normal,
               ),
             ],
