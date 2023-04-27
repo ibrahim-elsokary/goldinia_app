@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:goldinia_app/core/models/gold_prices_model.dart';
+import 'package:goldinia_app/core/utils/constants.dart';
 import 'package:goldinia_app/core/utils/style_colors.dart';
 import 'package:goldinia_app/core/utils/styles.dart';
 import 'package:goldinia_app/features/home/pesentation/view_model/cubit/fetch_today_price_cubit.dart';
@@ -76,7 +77,7 @@ class CustomSellAndBuyWidget extends StatelessWidget {
               ),
               Center(
                   child: Text(
-                goldPrice.sellPrice!.round().toString(),
+                weightUnit=='oz'?(goldPrice.sellPrice!*ounceTogram).round().toString():(goldPrice.sellPrice!).round().toString(),
                 style: Styles.fontStyle18Normal,
               )),
               Center(
@@ -109,7 +110,7 @@ class CustomSellAndBuyWidget extends StatelessWidget {
               ),
               Center(
                   child: Text(
-                goldPrice.buyPrice!.round().toString(),
+                weightUnit=='oz'?(goldPrice.buyPrice!*ounceTogram).round().toString():(goldPrice.buyPrice!).round().toString(),
                 style: Styles.fontStyle18Normal,
               )),
               Center(

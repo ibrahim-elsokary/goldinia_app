@@ -40,7 +40,7 @@ class GoldsDetailsWidget extends StatelessWidget {
                         style: Styles.fontStyle18SimiBold,
                       ),
                       const Spacer(),
-                       CustomDropDownMenuForCountry(),
+                      const CustomDropDownMenuForCountry(),
                     ]),
                   ),
                   const SizedBox(
