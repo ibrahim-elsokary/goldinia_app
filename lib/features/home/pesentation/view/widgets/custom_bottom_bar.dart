@@ -16,8 +16,8 @@ class CustomBottomBar extends StatelessWidget {
       builder: (context, state) {
         return Container(
           clipBehavior: Clip.hardEdge,
-          margin: const EdgeInsets.only(bottom: 26, top: 26),
-          height: 115,
+          margin: const EdgeInsets.only(bottom: 26, top: 10),
+          height: MediaQuery.of(context).orientation == Orientation.landscape ?90 :115 ,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
           ),

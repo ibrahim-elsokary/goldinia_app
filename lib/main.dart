@@ -4,6 +4,7 @@ import 'package:goldinia_app/core/utils/service_locator.dart';
 import 'package:goldinia_app/features/home/data/repos/home_repo.dart';
 import 'package:goldinia_app/features/home/pesentation/view/home_view.dart';
 import 'package:goldinia_app/features/home/pesentation/view_model/cubit/fetch_today_price_cubit.dart';
+import 'package:goldinia_app/features/home/pesentation/view_model/cubit/manage_wallet_cubit.dart';
 import 'core/utils/bloc_observer.dart';
 
 
@@ -21,7 +22,8 @@ class GoldiniaApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => FetchTodayPriceCubit(getIt.get<HomeRepo>())..fetchTodayGoldPrice('egypt'),)
+        BlocProvider(create: (context) => FetchTodayPriceCubit(getIt.get<HomeRepo>())..fetchTodayGoldPrice('egypt'),),
+        BlocProvider(create: (context) => ManageWalletCubit(getIt.get<HomeRepo>())..fetchTodayGoldPrice('egypt'),)
       ],
       child: MaterialApp(
         theme:
