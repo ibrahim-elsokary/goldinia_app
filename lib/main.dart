@@ -5,7 +5,7 @@ import 'package:goldinia_app/features/home/data/repos/home_repo.dart';
 import 'package:goldinia_app/features/home/pesentation/view/home_view.dart';
 import 'package:goldinia_app/features/home/pesentation/view_model/cubit/fetch_today_price_cubit.dart';
 import 'core/utils/bloc_observer.dart';
-import 'package:http/http.dart'as http;
+
 
 void main() async {
   

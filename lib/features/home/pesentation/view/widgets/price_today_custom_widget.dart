@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:goldinia_app/core/models/country_model.dart';
 import 'package:goldinia_app/core/models/gold_prices_model.dart';
 import 'package:goldinia_app/core/utils/constants.dart';
 import 'package:goldinia_app/core/utils/style_colors.dart';
@@ -12,10 +13,12 @@ class PriceTodayCustomWidget extends StatelessWidget {
   const PriceTodayCustomWidget({
     super.key,
     required this.goldPrice,
-    required this.weightUnit,
+    required this.weightUnit, required this.countryModel,
+    
   });
   final GoldPrice goldPrice;
   final String weightUnit;
+  final CountryModel countryModel;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,7 +28,7 @@ class PriceTodayCustomWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
-          CustomSellAndBuyWidget(goldPrice: goldPrice, weightUnit: weightUnit),
+          CustomSellAndBuyWidget(goldPrice: goldPrice, weightUnit: weightUnit ,countryModel: countryModel),
           SizedBox(
             height: 7,
           ),
@@ -46,13 +49,17 @@ class PriceTodayCustomWidget extends StatelessWidget {
   }
 }
 
+
+
+
 class CustomSellAndBuyWidget extends StatelessWidget {
   const CustomSellAndBuyWidget({
     super.key,
     required this.goldPrice,
-    required this.weightUnit,
+    required this.weightUnit, required this.countryModel,
   });
   final GoldPrice goldPrice;
+  final CountryModel countryModel;
   final String weightUnit;
   @override
   Widget build(BuildContext context) {
@@ -82,7 +89,7 @@ class CustomSellAndBuyWidget extends StatelessWidget {
               )),
               Center(
                   child: Text(
-                '(EGP/$weightUnit)',
+                '(${countryModel.currencyShortForm}/$weightUnit)',
                 style: Styles.fontStyle18Normal,
               )),
               Center(
@@ -115,7 +122,7 @@ class CustomSellAndBuyWidget extends StatelessWidget {
               )),
               Center(
                   child: Text(
-                '(EGP/$weightUnit)',
+                '(${countryModel.currencyShortForm}/$weightUnit)',
                 style: Styles.fontStyle18Normal,
               )),
               Center(
@@ -129,6 +136,9 @@ class CustomSellAndBuyWidget extends StatelessWidget {
     );
   }
 }
+
+
+
 
 class LowerAndHigherPriceSection extends StatelessWidget {
   const LowerAndHigherPriceSection({
@@ -181,6 +191,9 @@ class LowerAndHigherPriceSection extends StatelessWidget {
     );
   }
 }
+
+
+
 
 class CustomSwitchButton extends StatelessWidget {
   const CustomSwitchButton({super.key});

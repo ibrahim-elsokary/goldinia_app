@@ -50,7 +50,7 @@ class GoldsDetailsWidget extends StatelessWidget {
                   const SizedBox(
                     height: 55,
                   ),
-                   PriceTodayCustomWidget(goldPrice: state.goldModel.goldprices[cubit.bottomNavBarIndex]!,weightUnit: cubit.isGram?"g":"oz" ),
+                   PriceTodayCustomWidget(goldPrice: state.goldModel.goldprices[cubit.bottomNavBarIndex]!,weightUnit: cubit.isGram?"g":"oz" ,countryModel: cubit.countryModel!),
                 ],
               ),
             ),
