@@ -8,11 +8,12 @@ import 'package:goldinia_app/features/home/pesentation/view_model/cubit/fetch_to
 import 'package:goldinia_app/features/home/pesentation/view_model/cubit/manage_wallet_cubit.dart';
 import 'core/utils/bloc_observer.dart';
 
-
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferencesHelper.initSharedPreferences();
+  //await SharedPreferencesHelper.clear();
+  await SharedPreferencesHelper.initSharedPreferencesValues();
+
   Bloc.observer = MyBlocObserver();
   setup();
   runApp(const GoldiniaApp());
@@ -25,8 +26,14 @@ class GoldiniaApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => FetchTodayPriceCubit(getIt.get<HomeRepo>())..fetchTodayGoldPrice('egypt'),),
-        BlocProvider(create: (context) => ManageWalletCubit(getIt.get<HomeRepo>())..fetchTodayGoldPrice('egypt'),)
+        BlocProvider(
+          create: (context) => FetchTodayPriceCubit(getIt.get<HomeRepo>())
+            ..fetchTodayGoldPrice('egypt'),
+        ),
+        BlocProvider(
+          create: (context) => ManageWalletCubit(getIt.get<HomeRepo>())
+            ,
+        )
       ],
       child: MaterialApp(
         theme:

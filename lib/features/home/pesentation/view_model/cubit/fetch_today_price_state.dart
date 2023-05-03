@@ -1,6 +1,6 @@
 part of 'fetch_today_price_cubit.dart';
 
-@immutable
+
 abstract class FetchTodayPriceState {}
 
 class FetchTodayPriceInitial extends FetchTodayPriceState {}

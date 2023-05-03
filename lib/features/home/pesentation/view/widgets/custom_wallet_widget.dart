@@ -1,55 +1,118 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:goldinia_app/core/models/gold_prices_model.dart';
+import 'package:goldinia_app/core/utils/constants.dart';
+import 'package:goldinia_app/core/utils/country_list.dart';
 import 'package:goldinia_app/core/utils/style_colors.dart';
 import 'package:goldinia_app/core/utils/styles.dart';
+import 'package:goldinia_app/features/home/pesentation/view/wallet_view.dart';
+import 'package:goldinia_app/features/home/pesentation/view/widgets/custom_expanded_button.dart';
+import 'package:goldinia_app/features/home/pesentation/view_model/cubit/manage_wallet_cubit.dart';
 
-class CustomWalletWidget extends StatelessWidget {
+class CustomWalletWidget extends StatefulWidget {
   const CustomWalletWidget({
     super.key,
   });
 
   @override
+  State<CustomWalletWidget> createState() => _CustomWalletWidgetState();
+}
+
+class _CustomWalletWidgetState extends State<CustomWalletWidget> {
+  @override
+  void initState() {
+    var cubit = BlocProvider.of<ManageWalletCubit>(context);
+    if (cubit.walletData.isNotEmpty)
+      cubit.fetchTodayGoldPrice(cubit.walletData[1]);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 10),
-      clipBehavior: Clip.hardEdge,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Stack(
-                  alignment: Alignment.centerRight,
-                  children: [
-                     Center(
-                      child: Text(
-                        '50G',
-                        style: Styles.fontStyle24Normal.copyWith(color: StyleColors.yellow),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.edit_square)),
-                    )
-                  ],
+    var cubit = BlocProvider.of<ManageWalletCubit>(context);
+
+    return BlocBuilder<ManageWalletCubit, ManageWalletState>(
+      builder: (context, state) {
+        if (cubit.walletData.isEmpty) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: ExpandedButton(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const WalletView(),
                 ),
               ),
-            ],
-          ),
-          const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: table(),
-          )
-        ],
-      ),
+            ),
+          );
+        } else if (state is FetchTodayPriceSuccess) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 20, bottom: 55),
+            child: Card(
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              clipBehavior: Clip.hardEdge,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30)),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Stack(
+                          alignment: Alignment.centerRight,
+                          children: [
+                            Center(
+                              child: Text(
+                                '${cubit.walletData[3]} ${cubit.walletData[0]}',
+                                style: Styles.fontStyle24Normal
+                                    .copyWith(color: StyleColors.yellow),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: IconButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        settings: RouteSettings(
+                                            arguments: state.goldModel),
+                                        builder: (context) =>
+                                            const WalletView(),
+                                      ),
+                                    );
+                                  },
+                                  icon: const Icon(Icons.edit_square)),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Divider(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: table(cubit.walletData, cubit.goldModel),
+                  )
+                ],
+              ),
+            ),
+          );
+        } else {
+          return const Center(child: CircularProgressIndicator());
+        }
+      },
     );
   }
 
-  Table table() {
+  Table table(List<String> walletData, GoldModel? goldModel) {
+    var currentGoldPrice = goldModel?.goldprices
+        .where((element) => element!.karatNumber == num.parse(walletData[2]))
+        .first!
+        .buyPrice;
     return Table(
       defaultVerticalAlignment: TableCellVerticalAlignment.middle,
       children: [
@@ -67,18 +130,27 @@ class CustomWalletWidget extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-              const Center(
+              Center(
                   child: Text(
-                '1966',
+                walletData[0] == 'g'
+                    ? currentGoldPrice!.round().toString()
+                    : (currentGoldPrice! * ounceTogram).round().toString(),
                 style: Styles.fontStyle14Normal,
               )),
-              const Center(
+              Center(
                   child: Text(
-                '98300',
+                walletData[0] == 'g'
+                    ? (double.parse(walletData[3]) * currentGoldPrice)
+                        .round()
+                        .toString()
+                    : ((double.parse(walletData[3]) * currentGoldPrice) *
+                            ounceTogram)
+                        .round()
+                        .toString(),
                 style: Styles.fontStyle14Normal,
               )),
-              const Text(
-                '(EGP/g)',
+              Text(
+                '(${CountryList.countries[walletData[1]]?.currencyShortForm}/${walletData[0]})',
                 style: Styles.fontStyle14Normal,
               ),
             ]),
@@ -91,18 +163,20 @@ class CustomWalletWidget extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-          const Center(
+          Center(
               child: Text(
-            '1966',
+            walletData[4],
             style: Styles.fontStyle14Normal,
           )),
-          const Center(
+          Center(
               child: Text(
-            '98300',
+            (double.parse(walletData[4]) * double.parse(walletData[3]))
+                .round()
+                .toString(),
             style: Styles.fontStyle14Normal,
           )),
-          const Text(
-            '(EGP/g)',
+          Text(
+            '(${CountryList.countries[walletData[1]]?.currencyShortForm}/${walletData[0]})',
             style: Styles.fontStyle14Normal,
           ),
         ]),

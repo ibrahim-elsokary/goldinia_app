@@ -18,3 +18,8 @@ class FetchTodayPriceFailure extends ManageWalletState {
 
   FetchTodayPriceFailure(this.errorMsg);
 }
+
+class AddWallet extends ManageWalletState {}
+
+class ChangeWalletSwitch extends ManageWalletState {}
+

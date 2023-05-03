@@ -7,8 +7,6 @@ import 'package:goldinia_app/features/home/pesentation/view_model/cubit/fetch_to
 import 'country_flag.dart';
 
 class CustomDropDownMenuForCountry extends StatelessWidget {
-  
-
   const CustomDropDownMenuForCountry({super.key});
   @override
   Widget build(BuildContext context) {
@@ -17,10 +15,10 @@ class CustomDropDownMenuForCountry extends StatelessWidget {
       builder: (context, state) {
         return DropdownButton(
           value: cubit.countryModel,
-          items: CountryList.countries.map((e) {
+          items: CountryList.countries.values.map((value) {
             return DropdownMenuItem(
-              value: e,
-              child: CountryFlag(imagePath: e.imagePath),
+              value: value,
+              child: CountryFlag(imagePath: value.imagePath),
             );
           }).toList(),
           onChanged: (value) {

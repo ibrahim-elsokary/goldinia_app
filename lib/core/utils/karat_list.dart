@@ -1,0 +1,1 @@
+const List<int> karatList = [14,18,21,22,24];
