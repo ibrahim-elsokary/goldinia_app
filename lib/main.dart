@@ -11,7 +11,7 @@ import 'core/utils/bloc_observer.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferencesHelper.initSharedPreferences();
-  //await SharedPreferencesHelper.clear();
+  await SharedPreferencesHelper.clear();
   await SharedPreferencesHelper.initSharedPreferencesValues();
 
   Bloc.observer = MyBlocObserver();

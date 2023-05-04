@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:goldinia_app/core/models/gold_prices_model.dart';
@@ -24,8 +22,9 @@ class _CustomWalletWidgetState extends State<CustomWalletWidget> {
   @override
   void initState() {
     var cubit = BlocProvider.of<ManageWalletCubit>(context);
-    if (cubit.walletData.isNotEmpty)
+    if (cubit.walletData.isNotEmpty) {
       cubit.fetchTodayGoldPrice(cubit.walletData[1]);
+    }
     super.initState();
   }
 

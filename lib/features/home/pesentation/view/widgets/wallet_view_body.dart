@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:goldinia_app/core/models/gold_prices_model.dart';
@@ -144,9 +142,20 @@ class WalletViewBody extends StatelessWidget {
                   ),
                 ),
               ),
-              IconButton(onPressed: () {
-                
-              }, icon:const Icon(Icons.delete_forever_outlined,size:40,)),
+              FloatingActionButton(
+
+                backgroundColor: Colors.red,
+                child: const Icon(
+                  size: 30,
+                  Icons.delete_forever,
+                ),
+                onPressed: () {
+                  cubit.deleteWallet();
+                  Navigator.pop(context);
+                },
+              ),
+
+              const SizedBox(height: 20,),
               CustomExpandedElevatedButton(
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
@@ -309,7 +318,6 @@ List<DropdownMenuItem> countryDropdownitems() {
             fit: BoxFit.scaleDown,
             child: Text(
               '${e.name} (${e.currencyShortForm}) ',
-              
             ),
           )
         ],
@@ -324,7 +332,6 @@ List<DropdownMenuItem> karatDropdownitems() {
         value: e.toString(),
         child: Text(
           '$e karat ',
-         
         ));
   }).toList();
 }

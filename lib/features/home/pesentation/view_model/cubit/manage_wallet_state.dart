@@ -19,6 +19,9 @@ class FetchTodayPriceFailure extends ManageWalletState {
   FetchTodayPriceFailure(this.errorMsg);
 }
 
+
+class DeleteWallet extends ManageWalletState {}
+
 class AddWallet extends ManageWalletState {}
 
 class ChangeWalletSwitch extends ManageWalletState {}

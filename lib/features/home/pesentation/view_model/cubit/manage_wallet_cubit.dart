@@ -38,4 +38,10 @@ class ManageWalletCubit extends Cubit<ManageWalletState> {
     walletData = args;
     emit(AddWallet());
   }
+
+    void deleteWallet() {
+    SharedPreferencesHelper.delete(key: 'walletValues');
+    walletData = [];
+    emit(DeleteWallet());
+  }
 }
