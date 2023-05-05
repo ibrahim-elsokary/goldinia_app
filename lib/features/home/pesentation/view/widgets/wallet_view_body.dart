@@ -8,6 +8,10 @@ import 'package:goldinia_app/core/utils/styles.dart';
 import 'package:goldinia_app/features/home/pesentation/view/widgets/country_flag.dart';
 import 'package:goldinia_app/features/home/pesentation/view_model/cubit/manage_wallet_cubit.dart';
 
+import 'custom_drop_down_menu_form_field.dart';
+import 'custom_expanded_elevated_button.dart';
+import 'custom_text_form_field.dart';
+
 class WalletViewBody extends StatelessWidget {
   const WalletViewBody({super.key, this.gold});
   final GoldModel? gold;
@@ -181,128 +185,10 @@ class WalletViewBody extends StatelessWidget {
   }
 }
 
-class CustomExpandedElevatedButton extends StatelessWidget {
-  const CustomExpandedElevatedButton({
-    super.key,
-    this.onPressed,
-  });
-  final Function()? onPressed;
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 50,
-      width: double.infinity,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        child: const Text(
-          'Add / Update',
-          style: Styles.fontStyle18Normal,
-        ),
-        style: const ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(StyleColors.yellow),
-          shape: MaterialStatePropertyAll(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
 
-class CustomDropDownMenuFormField extends StatelessWidget {
-  const CustomDropDownMenuFormField({
-    super.key,
-    this.validator,
-    this.onChanged,
-    this.items,
-    required this.label,
-    this.hintText,
-    this.value,
-    this.onSaved,
-  });
-  final String? Function(dynamic)? validator;
-  final void Function(dynamic)? onChanged;
-  final void Function(dynamic)? onSaved;
-  final List<DropdownMenuItem<dynamic>>? items;
-  final String label;
-  final String? hintText;
-  final dynamic value;
-  @override
-  Widget build(BuildContext context) {
-    return DropdownButtonFormField(
-      onSaved: onSaved,
-      value: value,
-      validator: validator,
-      decoration: InputDecoration(
-        floatingLabelStyle:
-            Styles.fontStyle18Normal.copyWith(color: StyleColors.yellow),
-        focusColor: StyleColors.yellow,
-        label: Text(label),
-        hintStyle: Styles.fontStyle18Normal,
-        hintText: hintText,
-        border: OutlineInputBorder(
-          borderSide: const BorderSide(width: 2),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: StyleColors.yellow, width: 2),
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ),
-      items: items,
-      onChanged: onChanged,
-    );
-  }
-}
 
-class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({
-    super.key,
-    this.onSaved,
-    required this.label,
-    this.hintText,
-    this.keyboardType,
-    this.prefixIcon,
-    this.validator,
-    this.value,
-  });
-  final Function(String?)? onSaved;
-  final String label;
-  final String? hintText;
-  final TextInputType? keyboardType;
-  final Widget? prefixIcon;
-  final String? Function(String?)? validator;
-  final String? value;
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      initialValue: value,
-      validator: validator,
-      keyboardType: keyboardType,
-      cursorColor: StyleColors.yellow,
-      onSaved: onSaved,
-      decoration: InputDecoration(
-        prefixIcon: prefixIcon,
-        floatingLabelStyle:
-            Styles.fontStyle18Normal.copyWith(color: StyleColors.yellow),
-        focusColor: StyleColors.yellow,
-        label: Text(label),
-        hintStyle: Styles.fontStyle18Normal,
-        hintText: hintText,
-        border: OutlineInputBorder(
-          borderSide: const BorderSide(width: 2),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: StyleColors.yellow, width: 2),
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ),
-    );
-  }
-}
+
+
 
 List<DropdownMenuItem> countryDropdownitems() {
   return CountryList.countries.values.map((e) {
