@@ -17,10 +17,10 @@
     "country_hint":"الرجاء تحديد الدولة",
     "karat_hint":"الرجاء تحديد رقم قيراط",
     "weight_hint":"الرجاء إدخال الوزن",
-    "bought_hint":"الرجاء إدخال القيمة المشتراة",
+    "bought_hint":"الرجاء إدخال قيمه الشراء",
     "country_validation":"الرجاء تحديد الدولة",
     "karat_validation":"الرجاء تحديد رقم قيراط",
     "weight_validation":"الرجاء إدخال الوزن",
-    "bought_valedation":"الرجاء إدخال القيمة المشتراة",
+    "bought_valedation":"الرجاء إدخال قيمه الشراء",
     "add_update":"إضافة / تحديث"
 }
