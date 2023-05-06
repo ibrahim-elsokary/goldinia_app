@@ -13,14 +13,14 @@
     "country_lable":"الدولة",
     "karat_lable":"قيراط",
     "weight_lable":"الوزن",
-    "Bought_value_lable":"قيمه الشراء",
+    "Bought_value_lable":"اشترى قيمة",
     "country_hint":"الرجاء تحديد الدولة",
     "karat_hint":"الرجاء تحديد رقم قيراط",
     "weight_hint":"الرجاء إدخال الوزن",
-    "bought_hint":"الرجاء إدخال قيمه الشراء",
+    "bought_hint":"الرجاء إدخال القيمة المشتراة",
     "country_validation":"الرجاء تحديد الدولة",
     "karat_validation":"الرجاء تحديد رقم قيراط",
     "weight_validation":"الرجاء إدخال الوزن",
-    "bought_valedation":"الرجاء إدخال قيمه الشراء",
+    "bought_valedation":"الرجاء إدخال القيمة المشتراة",
     "add_update":"إضافة / تحديث"
 }
